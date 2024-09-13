@@ -131,3 +131,50 @@ False
 ```
 
 The object does not get created because the signal handler raised an exception, causing the entire transaction to roll back. This confirms that signals run in the same transaction as the caller by default.
+
+
+### You are tasked with creating a Rectangle class with the following requirements:
+
+1. An instance of the `Rectangle` class requires `length:int` and `width:int` to be initialized.
+2. We can iterate over an instance of the `Rectangle` class.
+3. When an instance of the Rectangle class is iterated over, we first get its length in the format: `{'length': <VALUE_OF_LENGTH>}` followed by the width `{width: <VALUE_OF_WIDTH>}`
+
+
+```python
+class Rectangle:
+    def __init__(self, length: int, width: int):
+        self.length = int(length)
+        self.width = int(width)
+
+        # Check if length is greater than width
+        if self.length <= self.width:
+            raise ValueError("Length must be greater than width")
+
+    # Define the __iter__ method to make the class iterable
+    def __iter__(self):
+        return iter([{'length': self.length}, {'width': self.width}])
+
+x, y = input("Enter two values (length width): ").split()
+rect = Rectangle(x, y)
+
+# Iterate over the Rectangle object
+for item in rect:
+    print(item)
+```
+
+### Test case:
+
+#### Case 1:
+```bash
+Enter two values (length width): 10 5
+{'length': 10}
+{'width': 5}
+```
+
+#### Case 2:
+```bash
+Enter two values (length width): 5 11
+ValueError: Length must be greater than width
+```
+
+

@@ -17,7 +17,7 @@ class Rectangle:
         self.width = int(width)
 
         # Check if length is greater than width
-        if self.length <= self.width:
+        if self.length < self.width:
             raise ValueError("Length must be greater than width")
 
     # Define the __iter__ method to make the class iterable
